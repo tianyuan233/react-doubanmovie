@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {
   HeaderWrapper,
   HeaderPrimary,
@@ -8,8 +7,7 @@ import {
   LogoHref,
   Search,
   Input,
-  InputBtn,
-  Nav
+  InputBtn
 } from './style'
 
 class Header extends Component {
@@ -33,7 +31,7 @@ class Header extends Component {
           </Search>
         </HeaderPrimary>
         <HeaderSecondary>
-          <Nav>
+          {/* <Nav>
             <ul>
               <li>
                 <a href='#'>影讯&amp;购票</a>
@@ -60,11 +58,12 @@ class Header extends Component {
                 <a href='#'>2018书影音报告</a>
               </li>
             </ul>
-          </Nav>
+          </Nav> */}
         </HeaderSecondary>
       </HeaderWrapper>
     )
   }
 }
+
 
 export default Header

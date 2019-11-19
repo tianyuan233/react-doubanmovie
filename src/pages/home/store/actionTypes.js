@@ -1,0 +1,1 @@
+export const INIT_IN_THEATERS = 'home/in_theaters'
