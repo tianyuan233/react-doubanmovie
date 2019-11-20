@@ -3,8 +3,8 @@ import axios from 'axios'
 import { actionCreators } from '../store'
 import { connect } from 'react-redux'
 
-import { List, Rate, Icon, Tag } from 'antd'
-import { TagWrapper, ActorWrapper } from '../style'
+import { List, Rate, Icon, Tag, Button } from 'antd'
+import { TagWrapper, ActorWrapper, LoadMore } from '../style'
 const IMG_PROXY = '//images.weserv.nl/?url='
 const API_URL = 'https://douban.uieee.com/v2/movie/in_theaters'
 const IconText = ({ type, text }) => (
@@ -19,15 +19,16 @@ class InThreaters extends Component {
     return (
       <Fragment>
         <List
-          style={{marginLeft:20}}
+          style={{ marginLeft: 20 }}
           itemLayout='vertical'
           size='large'
-          pagination={{
-            onChange: page => {
-              console.log(page)
-            },
-            pageSize: 5
-          }}
+          // current
+          // pagination={{
+          //   onChange: (page,pageSize) => {
+          //     console.log(page,pageSize)
+          //   },
+          //   pageSize: 5
+          // }}
           dataSource={this.props.hot_subjects}
           footer={<div></div>}
           renderItem={item => (
@@ -45,10 +46,10 @@ class InThreaters extends Component {
                   key='list-vertical-like-o'
                 />,
                 <IconText
-                type='star-o'
-                text={item.collect_count}
-                key='list-vertical-star-o'
-              />
+                  type='star-o'
+                  text={item.collect_count}
+                  key='list-vertical-star-o'
+                />
               ]}
               extra={
                 <img
@@ -69,16 +70,13 @@ class InThreaters extends Component {
                 })}
               </TagWrapper>
               <ActorWrapper>
-                {
-                  item.casts.map(actor =>{
-                    return (
-                      <Tag color='orange' key={actor.name}>
+                {item.casts.map(actor => {
+                  return (
+                    <Tag color='orange' key={actor.name}>
                       <Icon type='user' /> {actor.name}
                     </Tag>
-                    )
-                  })
-                }
-
+                  )
+                })}
               </ActorWrapper>
               <div className='actor'></div>
               <Rate
@@ -86,19 +84,34 @@ class InThreaters extends Component {
                 allowHalf
                 defaultValue={Math.ceil(item.rating.average) / 2}
               />
-            
             </List.Item>
           )}
         />
+        <LoadMore>
+          <Button
+            onClick={() =>
+              this.props.getMoreData(this.props.hot_subjects.length)
+            }
+          >
+            点击加载更多
+          </Button>
+        </LoadMore>
       </Fragment>
     )
   }
   componentDidMount() {
-    axios.get(API_URL).then(res => {
-      const subjects = res.data.subjects
-      const action = actionCreators.initHotListAction(subjects)
-      this.props.initData(action)
-    })
+    axios
+      .get(API_URL, {
+        params: {
+          start: 0,
+          count: 5
+        }
+      })
+      .then(res => {
+        const subjects = res.data.subjects
+        const action = actionCreators.initHotListAction(subjects)
+        this.props.initData(action)
+      })
   }
 }
 const mapStateToProps = state => ({
@@ -107,6 +120,20 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   initData(action) {
     dispatch(action)
+  },
+  getMoreData(start) {
+    axios
+      .get(API_URL, {
+        params: {
+          start: start,
+          count: 5
+        }
+      })
+      .then(res => {
+        const subjects = res.data.subjects
+        const action = actionCreators.getMoreHotListAction(subjects)
+        dispatch(action)
+      })
   }
 })
 
