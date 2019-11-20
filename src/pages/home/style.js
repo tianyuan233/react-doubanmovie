@@ -16,3 +16,12 @@ export const HomeAside = styled.div`
   width: 300px;
   float: right;
 `
+
+export const TagWrapper = styled.div`
+/* border: 1px solid #000; */
+margin: 5px 0
+`
+export const ActorWrapper = styled.div`
+/* border: 1px solid #000; */
+margin: 5px 0
+`
