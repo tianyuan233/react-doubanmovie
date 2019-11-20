@@ -3,7 +3,7 @@ import axios from 'axios'
 import { actionCreators } from '../store'
 import { connect } from 'react-redux'
 
-import { List, Rate, Icon, Tag } from 'antd'
+import { List, Rate, Icon, Tag,Spin } from 'antd'
 import { TagWrapper, ActorWrapper } from '../style'
 const IMG_PROXY = '//images.weserv.nl/?url='
 const API_URL = 'https://douban.uieee.com/v2/movie/coming_soon'
@@ -29,6 +29,7 @@ class ComingSoon extends Component {
             pageSize: 5
           }}
           dataSource={this.props.coming_subjects}
+          locale={{ emptyText: <Spin /> }}
           footer={<div></div>}
           renderItem={item => (
             <List.Item

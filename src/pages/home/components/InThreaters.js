@@ -3,7 +3,7 @@ import axios from 'axios'
 import { actionCreators } from '../store'
 import { connect } from 'react-redux'
 
-import { List, Rate, Icon, Tag, Button } from 'antd'
+import { List, Rate, Icon, Tag, Button,Spin } from 'antd'
 import { TagWrapper, ActorWrapper, LoadMore } from '../style'
 const IMG_PROXY = '//images.weserv.nl/?url='
 const API_URL = 'https://douban.uieee.com/v2/movie/in_theaters'
@@ -22,14 +22,8 @@ class InThreaters extends Component {
           style={{ marginLeft: 20 }}
           itemLayout='vertical'
           size='large'
-          // current
-          // pagination={{
-          //   onChange: (page,pageSize) => {
-          //     console.log(page,pageSize)
-          //   },
-          //   pageSize: 5
-          // }}
           dataSource={this.props.hot_subjects}
+          locale={{ emptyText: <Spin /> }}
           footer={<div></div>}
           renderItem={item => (
             <List.Item
