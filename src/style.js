@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #111;
     background: #fff
   }
-  body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote {
+  body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,p,pre,code,form,fieldset,legend,input,button,textarea,blockquote {
       margin: 0;
       padding: 0
   }

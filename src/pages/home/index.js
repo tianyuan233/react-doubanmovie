@@ -1,4 +1,4 @@
-import { Tabs } from 'antd'
+import { Tabs, BackTop } from 'antd'
 import React, { Component } from 'react'
 import ComingSoon from './components/ComingSoon'
 import InThreaters from './components/InThreaters'
@@ -24,6 +24,7 @@ class Home extends Component {
           </Tabs>
         </HomeMain>
         <HomeAside>dd</HomeAside>
+        <BackTop></BackTop>
       </HomeWrapper>
     )
   }
