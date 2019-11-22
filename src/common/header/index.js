@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import {
   HeaderWrapper,
   HeaderPrimary,
@@ -16,7 +17,9 @@ class Header extends Component {
       <HeaderWrapper>
         <HeaderPrimary>
           <Logo>
+            <Link to='/'>
             <LogoHref />
+            </Link>
           </Logo>
           <Search className='search'>
             <Input>

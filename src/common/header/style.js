@@ -30,9 +30,7 @@ export const Logo = styled.div`
   margin: 0 13px 0 0;
   background: url(${logoPic}) no-repeat 0 12px;
 `
-export const LogoHref = styled.a.attrs({
-  href: '/'
-})`
+export const LogoHref = styled.a`
   display: block;
   width: 100%;
   height: 100%;

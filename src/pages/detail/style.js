@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const DetailWrapper = styled.div`
-  width: 675px;
+  width: 1040px;
   margin: 40px auto;
   padding: 12px;
 `
@@ -101,6 +101,7 @@ export const InterestWrapper = styled.div`
   padding: 20px 0 3px;
 `
 export const InfoWrapper = styled.div`
+  width:675px;
   padding: 20px 0 3px;
   h2 {
     color: #33752f;

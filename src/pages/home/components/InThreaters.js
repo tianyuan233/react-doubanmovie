@@ -27,7 +27,7 @@ class InThreaters extends Component {
           locale={{ emptyText: <Spin /> }}
           footer={<div></div>}
           renderItem={item => (
-            <Link to='/detail'>
+            <Link to={`/detail/${item.id}`}>
               <List.Item
                 key={item.title}
                 actions={[

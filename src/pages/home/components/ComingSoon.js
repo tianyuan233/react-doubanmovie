@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { actionCreators } from '../store'
 import { connect } from 'react-redux'
 
-import { List, Rate, Icon, Tag,Spin } from 'antd'
+import { List, Rate, Icon, Tag, Spin } from 'antd'
 import { TagWrapper, ActorWrapper } from '../style'
 const IMG_PROXY = '//images.weserv.nl/?url='
 const API_URL = 'https://douban.uieee.com/v2/movie/coming_soon'
@@ -32,59 +33,61 @@ class ComingSoon extends Component {
           locale={{ emptyText: <Spin /> }}
           footer={<div></div>}
           renderItem={item => (
-            <List.Item
-              key={item.id}
-              actions={[
-                <IconText
-                  type='calendar-o'
-                  text={item.mainland_pubdate}
-                  key='list-vertical-like-o'
-                />,
-                <IconText
-                  type='clock-circle-o'
-                  text={item.durations[0]}
-                  key='list-vertical-like-o'
-                />,
-                <IconText
-                  type='star-o'
-                  text={item.collect_count}
-                  key='list-vertical-star-o'
+            <Link to={`/detail/${item.id}`}>
+              <List.Item
+                key={item.id}
+                actions={[
+                  <IconText
+                    type='calendar-o'
+                    text={item.mainland_pubdate}
+                    key='list-vertical-like-o'
+                  />,
+                  <IconText
+                    type='clock-circle-o'
+                    text={item.durations[0]}
+                    key='list-vertical-like-o'
+                  />,
+                  <IconText
+                    type='star-o'
+                    text={item.collect_count}
+                    key='list-vertical-star-o'
+                  />
+                ]}
+                extra={
+                  <img
+                    width={100}
+                    alt='logo'
+                    src={IMG_PROXY + item.images.small}
+                  />
+                }
+              >
+                <h3>{item.title}</h3>
+                <TagWrapper>
+                  {item.genres.map((tag, index) => {
+                    return (
+                      <Tag color='green' key={index}>
+                        <Icon type='tag' /> {tag}
+                      </Tag>
+                    )
+                  })}
+                </TagWrapper>
+                <ActorWrapper>
+                  {item.casts.map(actor => {
+                    return (
+                      <Tag color='orange' key={actor.name}>
+                        <Icon type='user' /> {actor.name}
+                      </Tag>
+                    )
+                  })}
+                </ActorWrapper>
+                <div className='actor'></div>
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={Math.ceil(item.rating.average) / 2}
                 />
-              ]}
-              extra={
-                <img
-                  width={100}
-                  alt='logo'
-                  src={IMG_PROXY + item.images.small}
-                />
-              }
-            >
-              <h3>{item.title}</h3>
-              <TagWrapper>
-                {item.genres.map((tag,index) => {
-                  return (
-                    <Tag color='green' key={index}>
-                      <Icon type='tag' /> {tag}
-                    </Tag>
-                  )
-                })}
-              </TagWrapper>
-              <ActorWrapper>
-                {item.casts.map(actor => {
-                  return (
-                    <Tag color='orange' key={actor.name}>
-                      <Icon type='user' /> {actor.name}
-                    </Tag>
-                  )
-                })}
-              </ActorWrapper>
-              <div className='actor'></div>
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={Math.ceil(item.rating.average) / 2}
-              />
-            </List.Item>
+              </List.Item>
+            </Link>
           )}
         />
       </Fragment>

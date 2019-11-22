@@ -9,10 +9,11 @@ import {
   InfoWrapper
 } from './style'
 import { connect } from 'react-redux'
-import { Rate, Button, Icon, Spin,message } from 'antd'
+import { Rate, Button, Icon, Spin,Tag,message } from 'antd'
 import SubjectInfo from './components/SubjectInfo'
 import SubjectRate from './components/SubjectRate'
 import ActorList from './components/ActorList'
+import PhotoList from './components/PhotoList'
 import axios from 'axios'
 const IMG_PROXY = '//images.weserv.nl/?url='
 
@@ -49,7 +50,7 @@ class Detail extends Component {
             评价：
             <Rate
               onChange={() => {
-                message.success('评分提交成功')
+                message.success('评分提交成功',2)
               }}
             />
           </span>
@@ -69,8 +70,20 @@ class Detail extends Component {
           <div className='indent'>{subject.summary}</div>
         </InfoWrapper>
         <InfoWrapper>
+          <h2>{subject.title}的标签 · · · · · ·</h2>
+          {
+            subject.tags.map(tag=>{
+            return <Tag key={tag} style={{fontSize:14,color: '#37a',backgroundColor:'#f5f5f5'}}>{tag}</Tag>
+            })
+          }
+        </InfoWrapper>
+        <InfoWrapper>
           <h2>{subject.title}的主演 · · · · · ·</h2>
           <ActorList casts={subject.casts} />
+        </InfoWrapper>
+        <InfoWrapper>
+          <h2>{subject.title}的剧照 · · · · · ·</h2>
+          <PhotoList photos={subject.trailers} />
         </InfoWrapper>
       </DetailWrapper>
     )
@@ -78,7 +91,7 @@ class Detail extends Component {
 
   componentDidMount() {
     axios
-      .get('https://douban-api.uieee.com/v2/movie/subject/30362186')
+      .get('https://douban-api.uieee.com/v2/movie/subject/' + this.props.match.params.id)
       .then(res => {
         const detail = res.data
         const action = actionCreators.initDetailAction(detail)
