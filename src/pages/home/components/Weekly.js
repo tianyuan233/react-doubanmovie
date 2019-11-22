@@ -33,7 +33,7 @@ class Weekly extends Component {
           locale={{ emptyText: <Spin /> }}
           footer={<div></div>}
           renderItem={item => (
-            <Link to={`/detail/${item.id}`}>
+            <Link to={`/detail/${item.subject.id}`}>
               <List.Item
                 key={item.id}
                 actions={[
