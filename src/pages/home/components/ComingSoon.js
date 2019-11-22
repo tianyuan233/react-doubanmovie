@@ -20,7 +20,6 @@ class ComingSoon extends Component {
     return (
       <Fragment>
         <List
-          style={{ marginLeft: 20 }}
           itemLayout='vertical'
           size='large'
           pagination={{

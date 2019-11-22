@@ -20,7 +20,7 @@ class Weekly extends Component {
     return (
       <Fragment>
         <List
-          style={{ marginLeft: 20 }}
+          bordered='true'
           itemLayout='vertical'
           size='large'
           pagination={{
@@ -35,6 +35,7 @@ class Weekly extends Component {
           renderItem={item => (
             <Link to={`/detail/${item.subject.id}`}>
               <List.Item
+                bordered='true'
                 key={item.id}
                 actions={[
                   <IconText

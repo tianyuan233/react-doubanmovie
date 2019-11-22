@@ -7,8 +7,7 @@ export const HomeWrapper = styled.div`
 export const HomeMain = styled.div`
   width: 675px;
   float: left;
-  padding-right: 40px;
-  padding-top: 20px;
+  padding: 40px;
 `
 
 export const HomeAside = styled.div`

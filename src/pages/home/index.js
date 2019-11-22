@@ -23,7 +23,7 @@ class Home extends Component {
             </TabPane>
           </Tabs>
         </HomeMain>
-        <HomeAside>dd</HomeAside>
+        <HomeAside></HomeAside>
         <BackTop></BackTop>
       </HomeWrapper>
     )

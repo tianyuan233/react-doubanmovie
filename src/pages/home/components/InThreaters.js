@@ -20,7 +20,6 @@ class InThreaters extends Component {
     return (
       <Fragment>
         <List
-          style={{ marginLeft: 20 }}
           itemLayout='vertical'
           size='large'
           dataSource={this.props.hot_subjects}
